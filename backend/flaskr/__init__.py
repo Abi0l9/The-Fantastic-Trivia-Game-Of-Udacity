@@ -61,7 +61,7 @@ def create_app(test_config=None):
             current_category = [category[0].format() for category in db.session.query(Category.type,
                                                                                       Question.category).join(Question,
                                                                                                               Category.id == Question.category).order_by(Question.id).all()]
-            return current_category
+            return paginate_items(request, current_category)
 
     # ++++++ Get Category Type
     def get_category_types():
@@ -147,7 +147,7 @@ def create_app(test_config=None):
                     "success": True,
                     "success": 200,
                     "message": 'Ok',
-                    "deleted_question": question_id
+                    "deleted_question_id": question_id
                 })
             except:
                 db.session.rollback()
@@ -338,30 +338,6 @@ def create_app(test_config=None):
     Create error handlers for all expected errors
     including 404 and 422.
     """
-    @app.errorhandler(500)
-    def server_error():
-        return jsonify({
-            "success": False,
-            "error": 500,
-            "message": "Server couldn't process the request...Invalid request!"
-        }), 500
-
-    @app.errorhandler(404)
-    def not_found():
-        return jsonify({
-            "success": False,
-            "error": 404,
-            "message": "Content not found!"
-        }), 404
-
-    @app.errorhandler(422)
-    def unprocessed():
-        return jsonify({
-            "success": False,
-            "error": 422,
-            "message": "Can't process an empty or invalid input!"
-        }), 422
-
     @app.errorhandler(400)
     def bad_request():
         return jsonify({
@@ -378,6 +354,14 @@ def create_app(test_config=None):
             "message": "The server understands the request but fails to authorize it!"
         }), 403
 
+    @app.errorhandler(404)
+    def not_found():
+        return jsonify({
+            "success": False,
+            "error": 404,
+            "message": "Content not found!"
+        }), 404
+
     @app.errorhandler(409)
     def conflict():
         return jsonify({
@@ -386,8 +370,25 @@ def create_app(test_config=None):
             "message": "Request not completed due to a conflict with the correct state of resource... duplicate entry!"
         }), 409
 
+    @app.errorhandler(422)
+    def unprocessed():
+        return jsonify({
+            "success": False,
+            "error": 422,
+            "message": "Can't process an empty or invalid input!"
+        }), 422
+
+    @app.errorhandler(500)
+    def server_error():
+        return jsonify({
+            "success": False,
+            "error": 500,
+            "message": "Server couldn't process the request...Invalid request!"
+        }), 500
+
     ##################################################
     # Invalid link definition
+
     @app.route('/<string:link>', methods=['GET'])
     def inalid_links(link):
         site_links = ['questions', 'categories', 'quizzes']

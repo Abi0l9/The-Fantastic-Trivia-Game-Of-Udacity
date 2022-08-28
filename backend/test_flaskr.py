@@ -73,7 +73,7 @@ class TriviaTestCase(unittest.TestCase):
 
     #     self.assertEqual(res.status_code, 200)
     #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(data['deleted_question'])
+    #     self.assertTrue(data['deleted_question_id'])
 
     # delete test (failed) question already deleted or not found
     def test_delete_question_fail(self):
