@@ -7,7 +7,7 @@ from settings import DB_NAME, DB_USER, DB_PASSWORD
 
 
 database_path = "postgresql://{}:{}@{}/{}".format(
-    DB_USER,DB_PASSWORD,"localhost:5432", DB_NAME )
+    DB_USER, DB_PASSWORD, "localhost:5432", DB_NAME)
 
 db = SQLAlchemy()
 migrate = Migrate()
