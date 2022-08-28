@@ -1,0 +1,9 @@
+2022-08-28 12:47:16.712 WAT [31753] LOG:  starting PostgreSQL 14.2 on aarch64-unknown-linux-android, compiled by Android (7714059, based on r416183c1) clang version 12.0.8 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee), 64-bit
+2022-08-28 12:47:16.713 WAT [31753] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-08-28 12:47:16.714 WAT [31753] LOG:  listening on Unix socket "/data/data/com.termux/files/usr/tmp/.s.PGSQL.5432"
+2022-08-28 12:47:16.805 WAT [31757] LOG:  database system was interrupted; last known up at 2022-08-25 14:53:27 WAT
+2022-08-28 12:47:17.814 WAT [31757] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-08-28 12:47:17.830 WAT [31757] LOG:  redo starts at 0/190E618
+2022-08-28 12:47:17.830 WAT [31757] LOG:  invalid record length at 0/190E700: wanted 24, got 0
+2022-08-28 12:47:17.830 WAT [31757] LOG:  redo done at 0/190E6C8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-08-28 12:47:17.942 WAT [31753] LOG:  database system is ready to accept connections

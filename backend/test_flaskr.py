@@ -66,16 +66,16 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['categories'])
         self.assertEqual(len(data['categories']), 6)
 
-    # delete test (success)
-    # def test_delete_question_success(self):
-    #     res = self.client().delete('/questions/8')
-    #     data = json.loads(res.data)
+    #delete test (success)
+    def test_delete_question_success(self):
+        res = self.client().delete('/questions/8')
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(data['deleted_question_id'])
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['deleted_question_id'])
 
-    # delete test (failed) question already deleted or not found
+    #delete test (failed) question already deleted or not found
     def test_delete_question_fail(self):
         res = self.client().delete('/questions/5')
         data = json.loads(res.data)
@@ -100,15 +100,15 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
 
-    # new question was successfully added to the database using post method
-    # def test_post_new_question_success(self):
-    #     res = self.client().post(
-    #         '/questions', json={'question': 'The full meaning of CLI is ?', 'answer': 'Command Line Interface', 'difficulty': 3, 'category': 1})
-    #     data = json.loads(res.data)
+    #new question was successfully added to the database using post method
+    def test_post_new_question_success(self):
+        res = self.client().post(
+            '/questions', json={'question': 'The full meaning of CLI is ?', 'answer': 'Command Line Interface', 'difficulty': 3, 'category': 1})
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(data['message'], 'Ok')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['message'], 'Ok')
 
     # new question fail test due to duplicate entry (RETURNS SUCCESS AT TEST EXECUTION)
     def test_post_new_question_fail(self):
@@ -120,13 +120,13 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
 
     # new question failed test due to duplicate entry (RETURNS FAILED AT TEST EXECUTION)
-    # def test_post_new_question_fail(self):
-    #     res = self.client().post(
-    #         '/questions', json={'question': 'The full meaning of CLI is ?', 'answer': 'Command Line Interface', 'difficulty': 3, 'category': 1})
-    #     data = json.loads(res.data)
+    def test_post_new_question_fail(self):
+        res = self.client().post(
+            '/questions', json={'question': 'The full meaning of CLI is ?', 'answer': 'Command Line Interface', 'difficulty': 3, 'category': 1})
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
 
     # new question fail test due to an empty body (success)
     def test_post_new_question_fail_two(self):
