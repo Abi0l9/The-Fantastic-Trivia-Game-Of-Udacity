@@ -7,3 +7,6 @@
 2022-08-28 12:47:17.830 WAT [31757] LOG:  invalid record length at 0/190E700: wanted 24, got 0
 2022-08-28 12:47:17.830 WAT [31757] LOG:  redo done at 0/190E6C8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
 2022-08-28 12:47:17.942 WAT [31753] LOG:  database system is ready to accept connections
+2022-08-28 13:15:26.647 WAT [31753] LOG:  server process (PID 6869) was terminated by signal 9: Killed
+2022-08-28 13:15:26.647 WAT [31753] DETAIL:  Failed process was running: ROLLBACK
+2022-08-28 13:15:26.650 WAT [32137] FATAL:  terminating connection due to unexpected postmaster exit
