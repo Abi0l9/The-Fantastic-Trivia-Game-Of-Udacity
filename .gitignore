@@ -1,1 +1,14 @@
 frontend/node_modules/
+venv
+__pycache__
+.vscode
+
+# OS Generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+.Trashes
+.Spotlight-V100
+
