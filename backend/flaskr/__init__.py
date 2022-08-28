@@ -20,7 +20,6 @@ def create_app(test_config=None):
 
     """
     @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-
     """
     CORS(app)
 
@@ -35,8 +34,8 @@ def create_app(test_config=None):
         )
         return response
 
-    ###################   Functions ###########################
-    #+++++ Pagination
+    # Functions Definitions
+    # Pagination
     def paginate_items(request, selection):
         page = request.args.get("page", 1, type=int)
         start = (page - 1) * QUESTIONS_PER_PAGE
