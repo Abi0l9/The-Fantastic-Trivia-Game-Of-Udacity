@@ -19,7 +19,8 @@ def create_app(test_config=None):
     setup_db(app)
 
     """
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
+    @TODO: Set up CORS. Allow '*' for origins.
+    Delete the sample route after completing the TODOs
     """
     CORS(app)
 
@@ -54,6 +55,7 @@ def create_app(test_config=None):
             current_category = [category[0].format() for category in db.session.query(Category.type,
                                                                                       Question.category).join(Question,
                                                                                                               Category.id == Question.category).order_by(Question.category).distinct().all()]
+
             return current_category[int - 1]
         else:
             current_category = [category[0].format() for category in db.session.query(Category.type,
@@ -317,16 +319,30 @@ def create_app(test_config=None):
         formatted_questions = [question.format() for question in query] if category_id == 0 else [
             question.format() for question in questions_by_category]
 
-        # present random questions but get the indexes first through random method
-        question_index = random.randrange(0, len(formatted_questions))
+        '''
+        loop through the formatted questions, check if the current question has already
+        made it into the list of previous questions, else, append it to the unique list
+        of questions, and present the user/developer the unique questions. In a situaion
+        whereby the unique questions are not up to the amount of games per play (out of
+        range), the server throws an error, hence, we'll need to send a 200 response to the server
+        to know that the questions is limited, the game should come to an end, and everything
+        is fine from our end. 
+        '''
 
-        # current question is derived based on the index
-        current_question = formatted_questions[question_index]
+        unique_questions = []
+        for current_question in formatted_questions:
+            if current_question['id'] not in previous_questions:
+                unique_questions.append(current_question)
+        if len(unique_questions) == 0:
+            return jsonify({
+                "success": True
+            })
+        random_question = random.choice(unique_questions)
 
         return jsonify({
             "success": True,
             "message": 'OK',
-            "question": current_question,
+            "question": random_question,
             "total_questions": len(formatted_questions),
             "category": quiz_category['type']
         })
